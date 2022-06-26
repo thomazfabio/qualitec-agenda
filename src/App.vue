@@ -53,7 +53,7 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
-    logged: true,
+    logged: false,
     
   }),
 };

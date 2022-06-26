@@ -21,6 +21,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
+        
         <v-row no-gutters>
           <v-col>
             <v-btn
@@ -35,7 +36,6 @@
           </v-col>
         </v-row>
         <v-container fluid><p class="d-flex justify-center">ou</p></v-container>
-
         <v-row>
           <v-col>
             <v-btn block elevation="4" depressed color="primary"
@@ -67,12 +67,23 @@ export default {
     ],
   }),
   methods: {
-    async login() {
+    login() {
       const { email, password } = this;
-      try {
-        console.log(this.$firebase)
-        console.log("login");
-      } catch (error) {}
+
+      this.$firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Signed in
+          var user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(errorMessage);
+        });
     },
   },
 };

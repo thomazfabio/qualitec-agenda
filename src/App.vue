@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <v-card
-        v-if="logged == true"
+        v-if= "this.$store.state.user"
         style="border-radius: 0px"
         class="mx-auto overflow-hidden"
         height="100vh"
@@ -40,7 +40,6 @@
         </v-navigation-drawer>
       </v-card>
       <v-container v-else fill-height fluid>
-        <router-link to="login"></router-link>
         <router-view></router-view>
       </v-container>
     </v-main>
@@ -53,8 +52,8 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
-    logged: false,
-    
   }),
 };
+
+
 </script>

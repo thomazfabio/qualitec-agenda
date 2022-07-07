@@ -1,0 +1,89 @@
+<template>
+  <v-row no-gutters justify="center">
+    <v-col sm="4">
+      <h2 class="primary--text text--accent-4">
+        Registro de novo usuário
+      </h2>
+      <v-form v-model="valid">
+        <v-row>
+          <v-col cols="12" md="12">
+            <v-text-field
+              v-model="firstname"
+              :rules="nameRules"
+              label="Nome"
+              required
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" md="12">
+            <v-text-field
+              v-model="lastname"
+              :rules="nameRules"
+              label="Sobrenome"
+              required
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" md="12">
+            <v-text-field
+              v-model="email"
+              :rules="emailRules"
+              label="E-mail"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" md="12">
+            <v-text-field
+              v-model="password"
+              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+              :type=" show ? 'text' : 'password'"
+              :rules="emailRules"
+              label="Senha"
+              required
+              @click:append="show = !show"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <router-link to="register">
+              <v-btn block elevation="4" depressed color="primary"
+                >Cadastrar</v-btn
+              ></router-link
+            >
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col>
+            <router-link style="text-decoration: none" to="login">
+              <v-btn style="color:white" block elevation="4" depressed color="red" 
+                >Cancelar</v-btn
+              ></router-link
+            >
+          </v-col>
+        </v-row>
+      </v-form>
+    </v-col>
+  </v-row>
+</template>
+<script>
+export default {
+  data: () => ({
+    show: false,
+    valid: false,
+    firstname: "",
+    lastname: "",
+    nameRules: [
+      (v) => !!v || "Name is required",
+      (v) => v.length <= 10 || "Name must be less than 10 characters",
+    ],
+    password:"",
+    email: "",
+    emailRules: [
+      (v) => !!v || "E-mail is required",
+      (v) => /.+@.+/.test(v) || "E-mail must be valid",
+    ],
+  }),
+};
+</script>

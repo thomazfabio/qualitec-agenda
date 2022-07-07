@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters justify="center">
     <v-col sm="4">
-      <h2 class="primary--text text--accent-4">Login</h2>
+      <h2 class="primary--text text--accent-4 d-flex justify-center">Login</h2>
       <v-form v-model="valid">
         <v-row>
           <v-col cols="12" md="12">
@@ -21,7 +21,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        
+
         <v-row no-gutters>
           <v-col>
             <v-btn
@@ -35,11 +35,13 @@
             >
           </v-col>
         </v-row>
-        <v-container fluid><p class="d-flex justify-center">ou</p></v-container>
+        <p class="d-flex justify-center" style="margin: 0">ou</p>
         <v-row>
           <v-col>
-            <v-btn block elevation="4" depressed color="primary"
-              >Cadastrar</v-btn
+            <router-link style="text-decoration: none" to="register">
+              <v-btn block elevation="4" depressed color="primary"
+                >Cadastrar</v-btn
+              ></router-link
             >
           </v-col>
         </v-row>
@@ -74,10 +76,10 @@ export default {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          // Signed in
           var user = userCredential.user;
-          console.log(user);
-          // ...
+          this.$store.dispatch("logarUser", user);
+          console.log(this.$store.state.user);
+          this.$router.replace({ name: "home" });
         })
         .catch((error) => {
           var errorCode = error.code;

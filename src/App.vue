@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <v-card
-        v-if= "this.$store.state.user"
+        v-if="this.$store.state.user"
         style="border-radius: 0px"
         class="mx-auto overflow-hidden"
         height="100vh"
@@ -35,6 +35,12 @@
                   <v-list-item-title>Account</v-list-item-title>
                 </v-list-item>
               </router-link>
+              <v-list-item @click="logout()">
+                <v-list-item-icon>
+                  <v-icon>mdi-logout</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Sair</v-list-item-title>
+              </v-list-item>
             </v-list-item-group>
           </v-list>
         </v-navigation-drawer>
@@ -53,7 +59,19 @@ export default {
     drawer: false,
     group: null,
   }),
+  methods: {
+    logout() {
+      this.$firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          // Sign-out successful.
+          console.log('Sign-out successful')
+        })
+        .catch((error) => {
+          // An error happened.
+        });
+    },
+  },
 };
-
-
 </script>

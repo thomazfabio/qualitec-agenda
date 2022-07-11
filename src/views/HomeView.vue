@@ -4,13 +4,15 @@
 
 <script>
 export default {
+  //INICIO #GUARDAS DE ROTAS
   beforeRouteEnter(to, from, next) {
-      next((vm) => {
-        console.log("na rota");
-        var store = vm.$store.state.user;
-        console.log(store);
-        if(store == null){vm.$router.replace({ name: "login" })}
-      });
+    next((vm) => {
+      var store = vm.$store.state.user;
+      if (store == null) {
+        vm.$router.replace({ name: "login" });
+      }
+    });
   },
+  //FIM #GUARDAS DE ROTAS
 };
 </script>

@@ -2,6 +2,7 @@
   <v-row no-gutters justify="center">
     <v-col sm="4">
       <h2 class="primary--text text--accent-4 d-flex justify-center">Login</h2>
+      <span>{{notificationUser}}</span>
       <v-form v-model="valid">
         <v-row>
           <v-col cols="12" md="12">
@@ -25,6 +26,7 @@
         <v-row no-gutters>
           <v-col>
             <v-btn
+              large
               @click="login()"
               block
               elevation="4"
@@ -39,7 +41,13 @@
         <v-row>
           <v-col>
             <router-link style="text-decoration: none" to="register">
-              <v-btn block elevation="4" depressed color="primary"
+              <v-btn
+                large
+                block
+                elevation="4"
+                depressed
+                color="blue-grey darken-3"
+                style="color: white"
                 >Cadastrar</v-btn
               ></router-link
             >
@@ -54,6 +62,7 @@
 export default {
   name: "Login",
   data: () => ({
+    notificationUser: "",
     valid: true,
     firstname: "",
     lastname: "",
@@ -70,7 +79,7 @@ export default {
   }),
   methods: {
     login() {
-      const { email, password } = this;
+      const { email, password, } = this;
 
       this.$firebase
         .auth()
@@ -84,6 +93,7 @@ export default {
         .catch((error) => {
           var errorCode = error.code;
           var errorMessage = error.message;
+          this.notificationUser = errorMessage
           console.log(errorMessage);
         });
     },

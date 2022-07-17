@@ -1,5 +1,7 @@
 <template>
-  <v-btn block class="primary--text text--accent-4"> Cadastrar </v-btn>
+  <v-btn block class="primary--text text--accent-4">
+    Cadastrar
+  </v-btn>
 </template>
 
 <script>
@@ -14,5 +16,12 @@ export default {
     });
   },
   //FIM #GUARDAS DE ROTAS
-};
+  data: () => ({
+    id:"",
+    name:"",
+    email:"",
+
+  }),
+}
+
 </script>

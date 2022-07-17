@@ -1,8 +1,8 @@
 <template>
   <v-row no-gutters justify="center">
     <v-col sm="4">
-      <h2 class="primary--text text--accent-4 d-flex justify-center">Login</h2>
-      <span>{{notificationUser}}</span>
+      <h1 class="primary--text text--accent-4 d-flex">Login</h1>
+      <span>{{ notificationUser }}</span>
       <v-form v-model="valid">
         <v-row>
           <v-col cols="12" md="12">
@@ -64,36 +64,34 @@ export default {
   data: () => ({
     notificationUser: "",
     valid: true,
-    firstname: "",
-    lastname: "",
     password: "",
+    email: "",
     nameRules: [
       (v) => !!v || "Password é requerido",
       (v) => v.length >= 6 || "Passwords não pode ter menos de 6 caracteres",
     ],
-    email: "",
     emailRules: [
       (v) => !!v || "E-mail é requerido",
       (v) => /.+@.+/.test(v) || "E-mail está inválido",
     ],
   }),
   methods: {
-    login() {
-      const { email, password, } = this;
-
+    async login() {
+      const { email, password } = this;
+      localStorage.AuthPersistence = true
       this.$firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
           var user = userCredential.user;
           this.$store.dispatch("logarUser", user);
-          console.log(this.$store.state.user);
+          this.$store.dispatch("currentUser", user);
           this.$router.replace({ name: "home" });
         })
         .catch((error) => {
           var errorCode = error.code;
           var errorMessage = error.message;
-          this.notificationUser = errorMessage
+          this.notificationUser = errorMessage;
           console.log(errorMessage);
         });
     },

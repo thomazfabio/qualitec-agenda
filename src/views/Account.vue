@@ -6,16 +6,7 @@
 
 <script>
 export default {
-  //INICIO #GUARDAS DE ROTAS
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      var store = vm.$store.state.user;
-      if (store == null) {
-        vm.$router.replace({ name: "login" });
-      }
-    });
-  },
-  //FIM #GUARDAS DE ROTAS
+ 
   data: () => ({
     id:"",
     name:"",

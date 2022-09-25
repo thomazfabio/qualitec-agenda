@@ -4,6 +4,9 @@ import HomeView from '../views/HomeView.vue'
 import Account from '../views/Account.vue'
 import Login from '../views/LoginView.vue'
 import Register from '../views/RegisterView.vue'
+import store from '../store/index'
+import { firebaseApp } from '../plugins/firebase'
+
 
 
 Vue.use(VueRouter)
@@ -49,6 +52,14 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach(async (to, from, next) => {
+  await firebaseApp.auth().onAuthStateChanged((user) => {
+    if (!user && to.meta.requiresAuth == true && to.name !== 'login') {
+      next({ name: 'login' })
+    } else { next() }
+  });
 })
 
 export default router

@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <v-card
-        v-if="this.$store.state.user"
+        v-if="true"
         style="border-radius: 0px"
         class="mx-auto overflow-hidden"
         height="100vh"

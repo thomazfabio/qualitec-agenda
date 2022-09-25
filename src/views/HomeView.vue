@@ -14,18 +14,6 @@ export default {
     userEmail: '',
     userId: '',
   }),
-  //INICIO #GUARDAS DE ROTAS
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      var store = vm.$store.state.user;
-      if (store == null) {
-        vm.$router.replace({ name: "login" });
-      }
-    });
-  },
-  //FIM #GUARDAS DE ROTAS
-  mounted() {
-    this.userEmail = this.$store.state.user.email
-  },
+
 };
 </script>

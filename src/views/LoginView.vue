@@ -84,7 +84,6 @@ export default {
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
           var user = userCredential.user;
-          this.$store.dispatch("logarUser", user);
           this.$store.dispatch("currentUser", user);
           this.$router.replace({ name: "home" });
         })

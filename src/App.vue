@@ -1,8 +1,9 @@
 <template>
   <v-app>
+    <SpinnerView />
     <v-main>
       <v-card
-        v-if="true"
+        v-if="isLogged"
         style="border-radius: 0px"
         class="mx-auto overflow-hidden"
         height="100vh"
@@ -52,10 +53,18 @@
   </v-app>
 </template>
 <script>
+import { async } from "@firebase/util";
+
+import Spinner from "./views/SpinnerView.vue";
+import SpinnerView from "./views/SpinnerView.vue";
 export default {
   name: "App",
-
+  components: {
+    Spinner,
+    SpinnerView,
+  },
   data: () => ({
+    logged: null, //ainda não utilizado
     drawer: false,
     group: null,
   }),
@@ -66,12 +75,18 @@ export default {
         .signOut()
         .then(() => {
           // Sign-out successful.
-          console.log('Sign-out successful')
+          console.log("Sign-out successful");
         })
         .catch((error) => {
           // An error happened.
         });
     },
+  },
+  computed: {
+    //esta função que esta sendo utilizada para renderizar ou não o template do app
+    isLogged: function(){
+      return this.logged = this.$store.getters.currentUser
+    }
   },
 };
 </script>

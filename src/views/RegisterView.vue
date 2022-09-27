@@ -16,7 +16,7 @@
           <v-col cols="12" md="12">
             <v-text-field
               v-model="lastname"
-              :rules="nameRules"
+              :rules="lastNameRules"
               label="Sobrenome"
               required
             ></v-text-field>
@@ -33,12 +33,12 @@
           <v-col cols="12" md="12">
             <v-text-field
               v-model="password"
-              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show ? 'text' : 'password'"
-              :rules="emailRules"
+              :rules="passRules"
+              :append-icon="showEyePass ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="showEyePass ? 'text' : 'password'"
               label="Senha"
               required
-              @click:append="show = !show"
+              @click:append="showEyePass = !showEyePass"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -81,19 +81,27 @@
 <script>
 export default {
   data: () => ({
-    show: false,
+    showEyePass: false,
     valid: false,
     firstname: "",
     lastname: "",
-    nameRules: [
-      (v) => !!v || "Name is required",
-      (v) => v.length <= 10 || "Name must be less than 10 characters",
-    ],
     password: "",
     email: "",
+    nameRules: [
+      (v) => !!v || "Nome é obrigatório",
+      (v) => v.length <= 10 || "O nome deve ter menos de 10 caracteres",
+    ],
+    lastNameRules: [
+      (v) => !!v || "Sobrenome é obrigatório",
+      (v) => v.length <= 10 || "O sobrenome deve ter menos de 10 caracteres",
+    ],
+    passRules: [
+      (v) => !!v || "Password é obrigatório",
+      (v) => /.+@.+/.test(v) || "Password com formato inválido",
+    ],
     emailRules: [
-      (v) => !!v || "E-mail is required",
-      (v) => /.+@.+/.test(v) || "E-mail must be valid",
+      (v) => !!v || "E-mail é obrigatório",
+      (v) => /.+@.+/.test(v) || "E-mail deve ser válido",
     ],
   }),
   methods: {

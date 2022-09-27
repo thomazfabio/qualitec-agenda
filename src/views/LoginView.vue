@@ -16,9 +16,12 @@
           <v-col cols="12" md="12">
             <v-text-field
               v-model="password"
-              :rules="nameRules"
+              :rules="passRules"
+              :append-icon="showEyePass ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="showEyePass ? 'text' : 'password'"
               label="Senha"
               required
+              @click:append="showEyePass = !showEyePass"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -62,6 +65,7 @@
 export default {
   name: "Login",
   data: () => ({
+    showEyePass: false,
     notificationUser: "",
     valid: true,
     password: "",
@@ -69,6 +73,10 @@ export default {
     nameRules: [
       (v) => !!v || "Password é requerido",
       (v) => v.length >= 6 || "Passwords não pode ter menos de 6 caracteres",
+    ],
+    passRules: [
+      (v) => !!v || "Password é obrigatório",
+      (v) => /.+@.+/.test(v) || "Password com formato inválido",
     ],
     emailRules: [
       (v) => !!v || "E-mail é requerido",
@@ -78,13 +86,11 @@ export default {
   methods: {
     async login() {
       const { email, password } = this;
-      localStorage.AuthPersistence = true
+      localStorage.AuthPersistence = true;
       this.$firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          var user = userCredential.user;
-          this.$store.dispatch("currentUser", user);
           this.$router.replace({ name: "home" });
         })
         .catch((error) => {

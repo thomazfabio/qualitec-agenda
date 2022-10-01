@@ -69,7 +69,8 @@ export default {
     group: null,
   }),
   methods: {
-    logout() {
+    async logout() {
+      localStorage.AuthPersistence = false;
       this.$firebase
         .auth()
         .signOut()
@@ -84,9 +85,9 @@ export default {
   },
   computed: {
     //esta função que esta sendo utilizada para renderizar ou não o template do app
-    isLogged: function(){
-      return this.logged = this.$store.getters.currentUser
-    }
+    isLogged: function () {
+      return (this.logged = this.$store.getters.currentUser);
+    },
   },
 };
 </script>

@@ -16,7 +16,7 @@ export const firebaseApp = firebase.initializeApp({
     appId: process.env.VUE_APP_APP_ID
 });
 
-//Aqui setamos o tipo de persistencia escolhida pelo usuario, PERSISTENCIA LOCA ou PERSISTENCIA DE SESSÃO
+//Aqui setamos o tipo de persistencia escolhida pelo usuario, PERSISTENCIA LOCAL ou PERSISTENCIA DE SESSÃO
 const AuthPersistence = localStorage.AuthPersistence == 'true'
 if (AuthPersistence) {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)

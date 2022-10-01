@@ -25,7 +25,12 @@
             ></v-text-field>
           </v-col>
         </v-row>
-
+        <v-row no-gutters>
+          <v-checkbox
+            v-model="persist"
+            :label="`Manter conectado`"
+          ></v-checkbox>
+        </v-row>
         <v-row no-gutters>
           <v-col>
             <v-btn
@@ -65,6 +70,7 @@
 export default {
   name: "Login",
   data: () => ({
+    persist: false,
     showEyePass: false,
     notificationUser: "",
     valid: true,
@@ -86,8 +92,8 @@ export default {
   methods: {
     async login() {
       const { email, password } = this;
-      localStorage.AuthPersistence = true;
-      this.$firebase
+      localStorage.AuthPersistence = this.persist;
+      await this.$firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {

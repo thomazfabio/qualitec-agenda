@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters justify="center">
     <v-col sm="4">
-      <h1 class="primary--text text--accent-4 d-flex">Login</h1>
+      <v-text class="primary--text text--accent-4 d-flex display-1">Login</v-text>
       <span>{{ notificationUser }}</span>
       <v-form v-model="valid">
         <v-row>

@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters justify="center">
     <v-col sm="4">
-      <h2 class="primary--text text--accent-4">Registro de novo usuário</h2>
+      <v-text class="primary--text text--accent-4 d-flex title">Cadastre-se</v-text>
       <v-form v-model="valid">
         <v-row>
           <v-col cols="12" md="12">
@@ -112,9 +112,7 @@ export default {
         .createUserWithEmailAndPassword(email, password, firstname, lastname)
         .then((userCredential) => {
           // Signed in
-          var user = userCredential.user;
           var userId = userCredential.user.uid;
-          console.log(userId);
           // Guardar dados de perfil
           this.$firebase
             .database()
@@ -125,7 +123,6 @@ export default {
               email: email,
             })
             .then(() => {
-              this.$store.dispatch("logarUser", user);
               this.$router.replace({ name: "home" });
             });
         })

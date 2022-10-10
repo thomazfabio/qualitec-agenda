@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <SpinnerView />
+    <Spinner/>
     <v-main>
       <v-card
         v-if="isLogged"
@@ -55,13 +55,12 @@
 <script>
 import { async } from "@firebase/util";
 
-import Spinner from "./views/SpinnerView.vue";
-import SpinnerView from "./views/SpinnerView.vue";
+import Spinner from "./components/Spinner.vue";
+
 export default {
   name: "App",
   components: {
     Spinner,
-    SpinnerView,
   },
   data: () => ({
     logged: null, //ainda não utilizado

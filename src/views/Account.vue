@@ -1,10 +1,12 @@
 <template>
-  <cardAccount />
+  <div v-if="isLogged">
+    <cardAccount />
+  </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 import cardAccount from "../components/CardAccount.vue";
+
 export default {
   components: {
     cardAccount,
@@ -13,18 +15,12 @@ export default {
   created() {
     console.log(this.$vuetify.breakpoint.name);
   },
+
   computed: {
-    ...mapState({
-      userId: (state) => {
-        return state.currentUser.uid + "";
-      },
-      userEmail: (state) => {
-        return state.currentUser.email + "";
-      },
-      userName: (state) => {
-        return state.currentUser.displayName + "";
-      },
-    }),
+    //esta função que esta sendo utilizada para renderizar ou não o template do app
+    isLogged: function () {
+      return (this.logged = this.$store.getters.currentUser);
+    },
   },
 };
 </script>

@@ -55,7 +55,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
+
   await firebaseApp.auth().onAuthStateChanged((user) => {
+
     if (!user && to.meta.requiresAuth == true && to.name !== 'login') {
       next({ name: 'login' })
     } else next(store.dispatch("currentUser", user), store.dispatch("isSpinnerVisible", false))

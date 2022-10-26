@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <SpinnerView />
+    <Spinner/>
     <v-main>
       <v-card
         v-if="isLogged"
@@ -8,7 +8,7 @@
         class="mx-auto overflow-hidden"
         height="100vh"
       >
-        <v-app-bar color="primary" dark>
+        <v-app-bar  height="40px" color="primary" dark>
           <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
           <v-toolbar-title>Web App 1.0</v-toolbar-title>
@@ -33,7 +33,7 @@
                   <v-list-item-icon>
                     <v-icon>mdi-account</v-icon>
                   </v-list-item-icon>
-                  <v-list-item-title>Account</v-list-item-title>
+                  <v-list-item-title>Minha conta</v-list-item-title>
                 </v-list-item>
               </router-link>
               <v-list-item @click="logout()">
@@ -55,13 +55,12 @@
 <script>
 import { async } from "@firebase/util";
 
-import Spinner from "./views/SpinnerView.vue";
-import SpinnerView from "./views/SpinnerView.vue";
+import Spinner from "./components/Spinner.vue";
+
 export default {
   name: "App",
   components: {
     Spinner,
-    SpinnerView,
   },
   data: () => ({
     logged: null, //ainda não utilizado

@@ -1,7 +1,9 @@
 <template>
   <v-row no-gutters justify="center">
     <v-col sm="4">
-      <h1 class="primary--text text--accent-4 d-flex">Login</h1>
+      <p class="primary--text text--accent-4 d-flex display-1"
+        >Login</p
+      >
       <span>{{ notificationUser }}</span>
       <v-form v-model="valid">
         <v-row>
@@ -80,10 +82,7 @@ export default {
       (v) => !!v || "Password é requerido",
       (v) => v.length >= 6 || "Passwords não pode ter menos de 6 caracteres",
     ],
-    passRules: [
-      (v) => !!v || "Password é obrigatório",
-      (v) => /.+@.+/.test(v) || "Password com formato inválido",
-    ],
+    passRules: [(v) => !!v || "Password é obrigatório"],
     emailRules: [
       (v) => !!v || "E-mail é requerido",
       (v) => /.+@.+/.test(v) || "E-mail está inválido",

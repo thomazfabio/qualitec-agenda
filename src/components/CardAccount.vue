@@ -13,12 +13,11 @@
         ><v-avatar color="primary" size="105">
           <img src="https://avatars.githubusercontent.com/thomazfabio" alt="" />
         </v-avatar>
-        <div>
-          <v-card-text class="pa-0 ml-6 mt-2"> ID: {{ userId }} </v-card-text>
+        
           <v-btn class="ml-6 mt-10" small color="primary" dark>
             Editar Avatar
           </v-btn>
-        </div>
+        
       </v-container>
       <v-divider></v-divider>
       <!--inicio codigo da tabela-->
@@ -26,34 +25,33 @@
         <template v-slot:default>
           <tbody>
             <tr>
-              <th class="text-left" width="10%">Nome:</th>
-              <td class="text-left">{{ userName }}</td>
-              <td class="text-left">
+              <th class="text-left pr-2" width="10%">Nome:</th>
+              <td class="text-left pl-0 pr-0">{{ userName }}</td>
+              <td class="text-left pl-2 pr-0">
                 <v-btn tile small color="primary">
-                  <v-icon left> mdi-pencil </v-icon>
-                  Editar
+                  <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
               </td>
             </tr>
 
             <tr>
-              <th class="text-left">Email:</th>
-              <td class="text-left">{{ userEmail }}</td>
-              <td class="text-left">
+              <th class="text-left pr-2">Email:</th>
+              <td class="text-left pl-0 pr-0">{{ userEmail }}</td>
+              <td class="text-left pl-2 pr-0">
                 <v-btn tile small color="primary">
-                  <v-icon left> mdi-pencil </v-icon>
-                  Editar
+                  <v-icon small> mdi-pencil </v-icon>
+                
                 </v-btn>
               </td>
             </tr>
 
             <tr>
-              <th class="text-left">Telefone:</th>
-              <td class="text-left">+556696112740</td>
-              <td class="text-left">
+              <th class="text-left pr-2">Telefone:</th>
+              <td class="text-left pl-0 pr-0">+556696112740</td>
+              <td class="text-left pl-2 pr-0">
                 <v-btn tile small color="primary">
-                  <v-icon left> mdi-pencil </v-icon>
-                  Editar
+                  <v-icon small> mdi-pencil </v-icon>
+              
                 </v-btn>
               </td>
             </tr>

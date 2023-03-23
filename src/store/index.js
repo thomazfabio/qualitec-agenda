@@ -9,28 +9,29 @@ export default new Vuex.Store({
     isSpinnerVisible: true,
   },
   getters: {
-    currentUser(state){
+    currentUser(state) {
       return state.currentUser
     },
-    isSpinnerVisible(state){
+    isSpinnerVisible(state) {
       return state.isSpinnerVisible
     }
   },
   mutations: {
-    currentUser(state, payload){
+    currentUser(state, payload) {
       state.currentUser = payload
     },
-    isSpinnerVisible(state, payload){
+    isSpinnerVisible(state, payload) {
       state.isSpinnerVisible = payload
     }
   },
   actions: {
-    currentUser(context, payload){
+    currentUser(context, payload) {
       context.commit("currentUser", payload)
     },
-    isSpinnerVisible(context, payload){
+    isSpinnerVisible(context, payload) {
       context.commit("isSpinnerVisible", payload)
-    }
+    },
+    
   },
   modules: {
   }

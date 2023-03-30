@@ -71,7 +71,16 @@
       </v-row>
     </v-card>
 
-    <ModalImgT :width="width" :isAvatar=true v-if="upAvatar" @closeModal="closeModal()"> </ModalImgT>
+    <ModalImgT
+      :width="width"
+      :isAvatar="true"
+      typeImage="jpeg"
+      nameImage="avatar"
+      refImage="avatar"
+      v-if="upAvatar"
+      @closeModal="closeModal()"
+    >
+    </ModalImgT>
 
     <!--Componente avançado ESDUDAR BEM-->
     <ModalAlert v-if="deleteAlert">
@@ -119,8 +128,8 @@ export default {
     fechaModalAlert: function () {
       this.deleteAlert = false;
     },
-    closeModal: function(){
-      this.upAvatar = false
+    closeModal: function () {
+      this.upAvatar = false;
     },
     deletar: function () {
       this.deleteAlert = true;

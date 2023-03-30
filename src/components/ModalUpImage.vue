@@ -8,7 +8,7 @@
           >
         </v-row>
         <v-row class="pa-2">
-          <v-btn block depressed color="primary">
+          <v-btn block depressed color="primary" @click="showCropper = true">
             <v-icon>mdi-upload</v-icon> Upload</v-btn
           ></v-row
         >
@@ -18,31 +18,59 @@
           ></v-row
         >
       </v-container>
+
+      <imgCropper
+        v-model="showCropper"
+        :labels="{ submit: 'OK', cancel: 'CANCELAR' }"
+        :upload-handler="imgUpFirebase"
+      >
+      </imgCropper>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-
+import imgCropper from "vue-avatar-cropper";
 export default {
+  components: {
+    imgCropper,
+  },
   name: "ModalUpImage",
 
   props: {
     width: String,
-    RefImage: String,
+    refImage: String,
+    nameImage: String,
+    typeImage: String,
     isAvatar: Boolean,
   },
-  
-  },
+
   data() {
     return {
+      showCropper: false,
       dialog: true,
       isAvatarOn: this.isAvatar,
     };
   },
-  methods:{
-      cancelUpImg: function ()
-      {return this.dialog = false},
+  methods: {
+    cancelUpImg: function () {
+      return (this.dialog = false);
+    },
+    imgUpFirebase: function (data) {
+      var typeimg = this.typeImage + "";
+      console.log(typeof this.nameImage);
+
+      data.getCroppedCanvas().toBlob(async (blob) => {
+        let file = await blob;
+        let imgUp = {
+          RefImg: this.refImage,
+          nameImg: this.nameImage,
+          img: file,
+        };
+        console.log(imgUp);
+        this.$store.dispatch("upImgFirebase", imgUp);
+      }, "image/" + this.typeImage);
+    },
   },
 };
 </script>

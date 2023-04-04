@@ -57,9 +57,6 @@ export default {
       return (this.dialog = false);
     },
     imgUpFirebase: function (data) {
-      var typeimg = this.typeImage + "";
-      console.log(typeof this.nameImage);
-
       data.getCroppedCanvas().toBlob(async (blob) => {
         let file = await blob;
         let imgUp = {
@@ -67,7 +64,6 @@ export default {
           nameImg: this.nameImage,
           img: file,
         };
-        console.log(imgUp);
         this.$store.dispatch("upImgFirebase", imgUp);
       }, "image/" + this.typeImage);
     },

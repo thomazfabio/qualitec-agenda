@@ -11,7 +11,7 @@
       <v-divider></v-divider>
       <v-container class="d-flex" style="background: #f5f5f5"
         ><v-avatar color="primary" size="105">
-          <img src="https://avatars.githubusercontent.com/thomazfabio" alt="" />
+          <img :src="avatarURL" alt="" />
         </v-avatar>
 
         <v-btn
@@ -75,7 +75,7 @@
       :width="width"
       :isAvatar="true"
       typeImage="jpeg"
-      nameImage="avatar"
+      :nameImage="userId"
       refImage="avatar"
       v-if="upAvatar"
       @closeModal="closeModal()"
@@ -123,6 +123,7 @@ export default {
     loading: false,
     deleteAlert: false,
     upAvatar: false,
+    avatarURL: "",
   }),
   methods: {
     fechaModalAlert: function () {
@@ -140,6 +141,24 @@ export default {
     deleteAccount: function () {
       this.fechaModalAlert();
     },
+    getAvatarUrl() {
+      var userId = this.userId;
+      var imgRef = userId;
+      var storageRef = this.$firebase.storage().ref();
+      var avatarRef = storageRef.child("avatar/" + imgRef);
+      avatarRef
+        .getDownloadURL()
+        .then((url) => {
+          return (this.avatarURL = url);
+        })
+        .catch(() => {
+          var imgRef = "default";
+          var avatarRef = storageRef.child("avatar/" + imgRef);
+          avatarRef.getDownloadURL().then((url) => {
+            return (this.avatarURL = url);
+          });
+        });
+    },
   },
 
   computed: {
@@ -152,6 +171,9 @@ export default {
       },
       userName: (state) => {
         return state.currentUser.displayName;
+      },
+      primaryAvatarURL: (state) => {
+        return state.currentUser.photoURL;
       },
     }),
 
@@ -170,5 +192,12 @@ export default {
       }
     },
   },
+
+  created() {
+    this.getAvatarUrl();
+  },
+  updated(){
+    this.getAvatarUrl();
+  }
 };
 </script>

@@ -34,13 +34,13 @@ export default new Vuex.Store({
     },
     upImgFirebase(context, payload) {
       var storageRef = firebaseApp.storage().ref()
-      var mountainsRef = storageRef.child(payload.RefImg+"/"+payload.nameImg);
+      var mountainsRef = storageRef.child(payload.RefImg + "/" + payload.nameImg);
       // 'file' comes from the Blob or File API
       mountainsRef.put(payload.img).then((snapshot) => {
         console.log('Uploaded a blob or file!');
       });
       console.log(storageRef)
-    }
+    },
   },
   modules: {
   }

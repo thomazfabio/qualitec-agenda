@@ -1,5 +1,20 @@
 <template>
   <v-dialog v-model="dialog" persistent :width="width">
+    <v-card class="pa-2" v-if="isLoading">
+      <v-card-title class="primary--text"> Carregando Imagem... </v-card-title>
+      <v-progress-linear
+        indeterminate
+        color="yellow darken-2"
+      ></v-progress-linear>
+    </v-card>
+
+    <v-card class="pa-2" v-if="isLoadSucess">
+      <v-card-title class="green--text">
+        Sucesso
+        <v-icon large color="green darken-2"> mdi-check</v-icon>
+      </v-card-title>
+    </v-card>
+
     <v-card v-if="isAvatarOn">
       <v-container class="">
         <v-row class="pa-2">
@@ -50,7 +65,16 @@ export default {
       showCropper: false,
       dialog: true,
       isAvatarOn: this.isAvatar,
+      isLoading: false,
+      isLoadSucess: false,
+      isLoadError: false,
     };
+  },
+  computed: {
+    getuploadImageStatus: function () {
+      let msg = this.$store.getters.uploadImageStatus;
+      return msg;
+    },
   },
   methods: {
     cancelUpImg: function () {
@@ -66,6 +90,33 @@ export default {
         };
         this.$store.dispatch("upImgFirebase", imgUp);
       }, "image/" + this.typeImage);
+    },
+  },
+
+  //monitora a mudança de status do uploading
+  watch: {
+    getuploadImageStatus: function (Newdata, oldData) {
+      if (Newdata === null) {
+        console.log(Newdata);
+      }
+      if (Newdata === "uploading") {
+        console.log(Newdata);
+        this.isLoading = true;
+        this.isAvatarOn = false;
+      }
+      if (Newdata === "success") {
+        console.log(Newdata);
+        this.$store.dispatch("setStatusUploadImage", null);
+        this.isLoading = false;
+        this.isLoadSucess = true;
+        setTimeout(() => {
+          this.$emit("closeModal");
+        }, 1000);
+      }
+      if (Newdata === "error") {
+        console.log(Newdata);
+        this.$emit("closeModal");
+      }
     },
   },
 };

@@ -36,6 +36,14 @@
                   <v-list-item-title>Minha conta</v-list-item-title>
                 </v-list-item>
               </router-link>
+              <router-link style="text-decoration: none" to="/setup">
+                <v-list-item @click="drawer = false">
+                  <v-list-item-icon>
+                    <v-icon>mdi-cog</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>Configuração</v-list-item-title>
+                </v-list-item>
+              </router-link>
               <v-list-item @click="logout()">
                 <v-list-item-icon>
                   <v-icon>mdi-logout</v-icon>

@@ -1,4 +1,6 @@
-# app-v
+<![alt](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+
+# App Genérico com Vue.js e Firebase
 ```
 Este projeto tem como objetivo agilizar a criação de um MVP,
 com as principais necessidades de um webApp já implementadas 

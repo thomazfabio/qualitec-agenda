@@ -2,7 +2,7 @@
 node_modules
 /dist
 Cronograma-Dev.md
-
+Exemplos de design
 # local env files
 .env.local
 .env.*.local

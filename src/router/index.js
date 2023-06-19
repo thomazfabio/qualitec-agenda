@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Account from '../views/Account.vue'
-import SetupSystem from '../views/SetupSystem.vue'
 import Login from '../views/LoginView.vue'
 import Register from '../views/RegisterView.vue'
 import store from '../store/index'
@@ -30,15 +29,6 @@ const routes = [
     path: '/account',
     name: 'account',
     component: Account,
-    meta: {
-      requiresAuth: true
-    }
-  },
-
-  {
-    path: '/setup',
-    name: 'setup',
-    component: SetupSystem,
     meta: {
       requiresAuth: true
     }

@@ -1,25 +1,16 @@
 <template>
-  <v-app>
-    <Spinner/>
+  <v-app style="background-color: #EBEBEB;">
+    <Spinner />
     <v-main>
-      <v-card
-        v-if="isLogged"
-        style="border-radius: 0px"
-        class="mx-auto overflow-hidden"
-        height="100vh"
-      >
-        <v-app-bar  height="40px" color="primary" dark>
-          <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-
+      <v-card  style="border-radius: 0px" class="mx-auto overflow-auto personal_bg_1" height="100vh">
+        <v-app-bar height="40px" color="primary" dark>
+          <v-app-bar-nav-icon v-if="isLogged" @click="drawer = true"></v-app-bar-nav-icon>
           <v-toolbar-title>Web App 1.0</v-toolbar-title>
         </v-app-bar>
         <router-view></router-view>
         <v-navigation-drawer v-model="drawer" absolute temporary>
           <v-list nav dense>
-            <v-list-item-group
-              v-model="group"
-              active-class="primary--text text--accent-4"
-            >
+            <v-list-item-group v-model="group" active-class="primary--text text--accent-4">
               <router-link style="text-decoration: none" to="/">
                 <v-list-item @click="drawer = false">
                   <v-list-item-icon>
@@ -54,9 +45,6 @@
           </v-list>
         </v-navigation-drawer>
       </v-card>
-      <v-container v-else fill-height fluid>
-        <router-view></router-view>
-      </v-container>
     </v-main>
   </v-app>
 </template>

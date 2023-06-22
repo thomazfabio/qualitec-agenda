@@ -1,20 +1,18 @@
 <template>
-  <v-container
-    fluid
-    class="grey lighten-4 elevation-5 pb-8"
-    style="border-radius: 6px"
-  >
+  <v-container>
+    <v-card
+    class="personal_bg_card pa-5"
+    :width="width"
+    style="margin: 0 auto;"
+    >
     <v-row>
       <v-col>
-        <h1 class="d-flex justify-center" style="color: #607d8b">Cadastrar</h1>
+        <h1 class="d-flex justify-center">Cadastrar</h1>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <p
-          class="d-flex justify-center font-weight-bold"
-          style="font-size: small; color: #607d8b"
-        >
+        <p class="d-flex justify-center font-weight-bold">
           Preencha os campos abaixo para criar sua conta
         </p>
       </v-col>
@@ -23,106 +21,70 @@
     <v-form v-model="valid">
       <v-row dense>
         <v-col>
-          <v-text-field
-            label="Nome"
-            placeholder="Seu primeiro nome"
-            outlined
-            dense
-          ></v-text-field>
+          <v-text-field label="Nome" placeholder="Seu primeiro nome" outlined dense></v-text-field>
         </v-col>
       </v-row>
 
       <v-row dense>
         <v-col>
-          <v-text-field
-            label="Sobrenome"
-            placeholder="Seu sobrenome"
-            outlined
-            dense
-          ></v-text-field>
+          <v-text-field label="Sobrenome" placeholder="Seu sobrenome" outlined dense></v-text-field>
         </v-col>
       </v-row>
 
       <v-row dense>
         <v-col>
-          <v-text-field
-            label="E-mail"
-            placeholder="Seu e-mail"
-            outlined
-            dense
-          ></v-text-field>
+          <v-text-field label="E-mail" placeholder="Seu e-mail" outlined dense></v-text-field>
         </v-col>
       </v-row>
 
       <v-row dense>
         <v-col>
-          <v-text-field
-            label="Senha"
-            placeholder="Sua senha"
-            outlined
-            dense
-            :append-icon="showEyePass ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showEyePass ? 'text' : 'password'"
-            @click:append="showEyePass = !showEyePass"
-          ></v-text-field>
+          <v-text-field label="Senha" placeholder="Sua senha" outlined dense
+            :append-icon="showEyePass ? 'mdi-eye' : 'mdi-eye-off'" :type="showEyePass ? 'text' : 'password'"
+            @click:append="showEyePass = !showEyePass"></v-text-field>
         </v-col>
       </v-row>
 
       <v-row dense>
         <v-col>
-          <v-text-field
-            label="Confirmar senha"
-            placeholder="Confirme sua senha"
-            outlined
-            dense
-            :append-icon="showEyePass ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showEyePass ? 'text' : 'password'"
-            @click:append="showEyePass = !showEyePass"
-          ></v-text-field>
+          <v-text-field label="Confirmar senha" placeholder="Confirme sua senha" outlined dense
+            :append-icon="showEyePass ? 'mdi-eye' : 'mdi-eye-off'" :type="showEyePass ? 'text' : 'password'"
+            @click:append="showEyePass = !showEyePass"></v-text-field>
         </v-col>
       </v-row>
 
       <v-row>
         <v-col>
           <router-link style="text-decoration: none" to="register">
-            <v-btn
-              large
-              block
-              elevation="4"
-              depressed
-              style="color: white"
-              color="blue-grey darken-3"
-              @click="register()"
-              >Cadastrar</v-btn
-            ></router-link
-          >
+            <v-btn class="personal_action_1" style="color: white;" large block elevation="4" depressed @click="register()">Cadastrar</v-btn></router-link>
         </v-col>
       </v-row>
 
-      <v-row align-content="center"  justify="center">
-          <p class="pr-2" style="margin: 0; font-size: small;">
-            Já tem uma conta? 
+      <v-row align-content="center" justify="center">
+        <p class="pr-2" style="margin: 0; font-size: small;">
+          Já tem uma conta?
+        </p>
+        <router-link style="text-decoration: none" to="login">
+          <p class="" style="margin: 0; color: primary; font-size: small;">
+            Entrar
           </p>
-          <router-link style="text-decoration: none" to="login">
-            <p class="" style="margin: 0; color: primary; font-size: small;">
-              Entrar
-            </p>
-          </router-link>
+        </router-link>
       </v-row>
-      <v-row align-content="center"  justify="center">
+      <v-row align-content="center" justify="center">
         <p class="pr-2" style="margin: 0; font-size: small;">ou</p>
       </v-row>
-      <v-row align-content="center"  justify="center">
-          <p class="pr-2" style="margin: 0; font-size: small;">
-            Vá para a página inicial
+      <v-row align-content="center" justify="center">
+        <p class="pr-2" style="margin: 0; font-size: small;">
+          Vá para a página inicial
+        </p>
+        <router-link style="text-decoration: none" to="home">
+          <p class="" style="margin: 0; color: primary; font-size: small;">
+            Home
           </p>
-          <router-link style="text-decoration: none" to="home">
-            <p class="" style="margin: 0; color: primary; font-size: small;">
-              Home
-            </p>
-          </router-link>
+        </router-link>
       </v-row>
     </v-form>
+  </v-card>
   </v-container>
 </template>
 <script>
@@ -199,5 +161,22 @@ export default {
         });
     },
   },
+
+  computed: {
+    width() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return "100vw";
+        case "sm":
+          return "70vw";
+        case "md":
+          return "60vw";
+        case "lg":
+          return "30vw";
+        case "xl":
+          return "30vw";
+      }
+    },
+  }
 };
 </script>

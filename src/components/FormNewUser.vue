@@ -1,90 +1,94 @@
 <template>
   <v-container>
-    <v-card
-    class="personal_bg_card pa-5"
-    :width="width"
-    style="margin: 0 auto;"
-    >
-    <v-row>
-      <v-col>
-        <h1 class="d-flex justify-center">Cadastrar</h1>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <p class="d-flex justify-center font-weight-bold">
-          Preencha os campos abaixo para criar sua conta
-        </p>
-      </v-col>
-    </v-row>
-
-    <v-form v-model="valid">
-      <v-row dense>
-        <v-col>
-          <v-text-field label="Nome" placeholder="Seu primeiro nome" outlined dense></v-text-field>
-        </v-col>
-      </v-row>
-
-      <v-row dense>
-        <v-col>
-          <v-text-field label="Sobrenome" placeholder="Seu sobrenome" outlined dense></v-text-field>
-        </v-col>
-      </v-row>
-
-      <v-row dense>
-        <v-col>
-          <v-text-field label="E-mail" placeholder="Seu e-mail" outlined dense></v-text-field>
-        </v-col>
-      </v-row>
-
-      <v-row dense>
-        <v-col>
-          <v-text-field label="Senha" placeholder="Sua senha" outlined dense
-            :append-icon="showEyePass ? 'mdi-eye' : 'mdi-eye-off'" :type="showEyePass ? 'text' : 'password'"
-            @click:append="showEyePass = !showEyePass"></v-text-field>
-        </v-col>
-      </v-row>
-
-      <v-row dense>
-        <v-col>
-          <v-text-field label="Confirmar senha" placeholder="Confirme sua senha" outlined dense
-            :append-icon="showEyePass ? 'mdi-eye' : 'mdi-eye-off'" :type="showEyePass ? 'text' : 'password'"
-            @click:append="showEyePass = !showEyePass"></v-text-field>
-        </v-col>
-      </v-row>
-
+    <v-card class="personal_bg_card pa-5" :width="width" style="margin: 0 auto;">
       <v-row>
         <v-col>
-          <router-link style="text-decoration: none" to="register">
-            <v-btn class="personal_action_1" style="color: white;" large block elevation="4" depressed @click="register()">Cadastrar</v-btn></router-link>
+          <h1 class="d-flex justify-center">Cadastrar</h1>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <p class="d-flex justify-center font-weight-bold">
+            Preencha os campos abaixo para criar sua conta
+          </p>
         </v-col>
       </v-row>
 
-      <v-row align-content="center" justify="center">
-        <p class="pr-2" style="margin: 0; font-size: small;">
-          Já tem uma conta?
-        </p>
-        <router-link style="text-decoration: none" to="login">
-          <p class="" style="margin: 0; color: primary; font-size: small;">
-            Entrar
+      <v-form v-model="valid">
+        <v-row dense>
+          <v-col>
+            <v-text-field label="Nome" placeholder="Seu primeiro nome" outlined dense v-model="firstname"
+              :rules="nameRules"></v-text-field>
+          </v-col>
+        </v-row>
+
+        <v-row dense>
+          <v-col>
+            <v-text-field label="Sobrenome" placeholder="Seu sobrenome" outlined dense v-model="lastname"
+              :rules="lastNameRules"></v-text-field>
+          </v-col>
+        </v-row>
+
+        <v-row dense>
+          <v-col>
+            <v-text-field label="E-mail" placeholder="Seu e-mail" outlined dense v-model="email"
+              :rules="emailRules"></v-text-field>
+          </v-col>
+        </v-row>
+
+        <v-row dense>
+          <v-col>
+            <v-text-field label="Senha" placeholder="Sua senha" outlined dense
+              :append-icon="showEyePass ? 'mdi-eye' : 'mdi-eye-off'" :type="showEyePass ? 'text' : 'password'"
+              @click:append="showEyePass = !showEyePass" v-model="password" :rules="passwordRules"></v-text-field>
+          </v-col>
+        </v-row>
+
+        <v-row dense>
+          <v-col>
+            <v-text-field label="Confirmar senha" placeholder="Confirme sua senha" outlined dense
+              :append-icon="showEyePassCheck ? 'mdi-eye' : 'mdi-eye-off'" :type="showEyePassCheck ? 'text' : 'password'"
+              @click:append="showEyePassCheck = !showEyePassCheck" v-model="passwordCheck" :rules="passwordRules"></v-text-field>
+          </v-col>
+        </v-row>
+
+        <v-alert dense outlined type="error" v-if="!passwordEquals">
+          As senhas devem ser <strong>iguais</strong>
+        </v-alert>
+
+        <v-row>
+          <v-col>
+            <router-link style="text-decoration: none" to="register">
+              <v-btn class="personal_action_1" style="color: white;" large block elevation="4" depressed
+                @click="register()">Cadastrar</v-btn></router-link>
+          </v-col>
+        </v-row>
+
+        <v-row align-content="center" justify="center">
+          <p class="pr-2" style="margin: 0; font-size: small;">
+            Já tem uma conta?
           </p>
-        </router-link>
-      </v-row>
-      <v-row align-content="center" justify="center">
-        <p class="pr-2" style="margin: 0; font-size: small;">ou</p>
-      </v-row>
-      <v-row align-content="center" justify="center">
-        <p class="pr-2" style="margin: 0; font-size: small;">
-          Vá para a página inicial
-        </p>
-        <router-link style="text-decoration: none" to="home">
-          <p class="" style="margin: 0; color: primary; font-size: small;">
-            Home
+          <router-link style="text-decoration: none" to="login">
+            <p class="" style="margin: 0; color: primary; font-size: small;">
+              Entrar
+            </p>
+          </router-link>
+        </v-row>
+        <v-row align-content="center" justify="center">
+          <p class="pr-2" style="margin: 0; font-size: small;">ou</p>
+        </v-row>
+        <v-row align-content="center" justify="center">
+          <p class="pr-2" style="margin: 0; font-size: small;">
+            Vá para a página inicial
           </p>
-        </router-link>
-      </v-row>
-    </v-form>
-  </v-card>
+          <router-link style="text-decoration: none" to="home">
+            <p class="" style="margin: 0; color: primary; font-size: small;">
+              Home
+            </p>
+          </router-link>
+        </v-row>
+      </v-form>
+    </v-card>
   </v-container>
 </template>
 <script>
@@ -94,24 +98,32 @@ export default {
   name: "formNewUser",
   data: () => ({
     showEyePass: false,
+    showEyePassCheck: false,
     valid: false,
     firstname: "",
     lastname: "",
     password: "",
+    passwordCheck: "",
     email: "",
     nameRules: [
       (v) => !!v || "Nome é obrigatório",
       (v) => v.length <= 10 || "O nome deve ter menos de 10 caracteres",
+      (v) => v.length >= 3 || "O nome deve ter no mínimo 3 caracteres",
     ],
     lastNameRules: [
       (v) => !!v || "Sobrenome é obrigatório",
       (v) => v.length <= 10 || "O sobrenome deve ter menos de 10 caracteres",
+      (v) => v.length >= 2 || "O sobrenome deve ter no mínimo 2 caracteres",
     ],
-    passRules: [(v) => !!v || "Password é obrigatório"],
+    passwordRules: [
+      (v) => !!v || "Password é obrigatório",
+      (v) => v.length >= 6 || "Password deve conter no mínimo 6 caracteres",
+    ],
     emailRules: [
       (v) => !!v || "E-mail é obrigatório",
-      (v) => /.+@.+/.test(v) || "E-mail deve ser válido",
+      (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)*$/.test(v) || "E-mail deve ser válido",
     ],
+
   }),
   methods: {
     async register() {
@@ -123,7 +135,6 @@ export default {
           // Signed in
           var userId = userCredential.user.uid;
           console.log(userCredential);
-
           //update dados user recen criado
           userCredential.user
             .updateProfile({
@@ -163,6 +174,10 @@ export default {
   },
 
   computed: {
+    passwordEquals() {
+      let passIsEqual = this.password === this.passwordCheck
+      return passIsEqual
+    },
     width() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":

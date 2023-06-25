@@ -11,7 +11,7 @@ no app você fica livre para trabalhar nas funcionalidades especificas
 de sua aplicação.
 ```
 Aqui você pode acessar um demo:
-[Demonstração o WebApp Genérico ](https://generic-web-app-vue-firebase-ntxt-qkb52lgpk-thomazfabio.vercel.app/login)
+[Demonstração o WebApp Genérico ](https://generic-web-app-vue-firebase-ntxt.vercel.app/)
 
 
 ## Funcionalidades do WebApp

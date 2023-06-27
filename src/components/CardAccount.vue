@@ -7,18 +7,18 @@
       :loading="loading"
       class="pb-10"
     >
-      <v-card-title>Informações da conta</v-card-title>
+      <v-card-title class="primary--text" >Informações da conta</v-card-title>
       <v-divider></v-divider>
       <v-container class="d-flex" style="background: #f5f5f5"
-        ><v-avatar color="primary" size="105">
+        ><v-avatar style="border: solid 1px #c5c5c5;" size="105">
           <img :src="avatarURL" alt="" />
         </v-avatar>
 
         <v-btn
-          style="margin-top: 75px; margin-left: 65px"
-          absolute
+        style="margin-top: 75px; margin-left: 65px"
+        absolute
           small
-          color="primary"
+          color="personal_action_2 lighten-2"
           dark
           @click="btnUpAvatar()"
         >
@@ -34,7 +34,7 @@
               <th class="text-left pr-2" width="10%">Nome:</th>
               <td class="text-left pl-0 pr-0">{{ userName }}</td>
               <td class="text-left pl-2 pr-0">
-                <v-btn tile small color="primary">
+                <v-btn style="color: white;" tile small color="personal_action_2 lighten-2">
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
               </td>
@@ -44,7 +44,7 @@
               <th class="text-left pr-2">Email:</th>
               <td class="text-left pl-0 pr-0">{{ userEmail }}</td>
               <td class="text-left pl-2 pr-0">
-                <v-btn tile small color="primary">
+                <v-btn style="color: white;" tile small color="personal_action_2 lighten-2">
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
               </td>
@@ -54,7 +54,7 @@
               <th class="text-left pr-2">Telefone:</th>
               <td class="text-left pl-0 pr-0">+556696112740</td>
               <td class="text-left pl-2 pr-0">
-                <v-btn tile small color="primary">
+                <v-btn style="color: white;" tile small color="personal_action_2 lighten-2">
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
               </td>

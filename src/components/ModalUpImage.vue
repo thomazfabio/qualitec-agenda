@@ -18,17 +18,17 @@
     <v-card v-if="isAvatarOn">
       <v-container class="">
         <v-row class="pa-2">
-          <v-btn block depressed color="primary">
+          <v-btn block depressed color="personal_action_2" style="color: white;">
             <v-icon>mdi-camera</v-icon> Camera</v-btn
           >
         </v-row>
         <v-row class="pa-2">
-          <v-btn block depressed color="primary" @click="showCropper = true">
+          <v-btn block depressed color="personal_action_1" style="color: white;" @click="showCropper = true">
             <v-icon>mdi-upload</v-icon> Upload</v-btn
           ></v-row
         >
         <v-row class="pa-2">
-          <v-btn block depressed color="warning" @click="$emit('closeModal')">
+          <v-btn block depressed color="error" style="color: white;" @click="$emit('closeModal')">
             <v-icon>mdi-cancel</v-icon> Cancelar</v-btn
           ></v-row
         >

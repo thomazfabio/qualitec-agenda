@@ -118,21 +118,6 @@
           </v-col>
         </v-row>
 
-        <v-row>
-          <v-col>
-            <v-btn
-              class="personal_action_1"
-              style="color: white"
-              large
-              block
-              elevation="4"
-              depressed
-              @click="rulesTest()"
-              >Testar</v-btn
-            >
-          </v-col>
-        </v-row>
-
         <v-row align-content="center" justify="center">
           <p class="pr-2" style="margin: 0; font-size: small">
             Já tem uma conta?
@@ -226,15 +211,14 @@ export default {
         this.password != "" &&
         rulesErros.length == 0
       ) {
+        // se tudo estiver ok
         this.registerFire(); //chama a função para registrar o usuario
-        console.log("tudo certo");
       } else {
         if (this.password !== this.passwordCheck) {
           rulesErros.push("As senhas devem ser iguais");
         }
-        console.log("algo errado");
+        // caso algo de errado
       }
-      console.log(rulesErros);
       this.detectedRulesErrors = rulesErros;
     },
     //...

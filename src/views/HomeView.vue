@@ -1,9 +1,6 @@
 <template>
-  <v-container>
-    <h1 class="primary--text text--accent-4">Dados do Usuario</h1>
-    <span></span>
-    <span>{{ userEmail }}</span>
-    <span>{{ userId }}</span>
+  <v-container  class="elevation-4">
+    <h1 class="primary--text">Aqui é onde você poderá construir a sua solução</h1>
   </v-container>
 </template>
 

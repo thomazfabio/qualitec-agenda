@@ -152,7 +152,7 @@ export default {
           return (this.avatarURL = url);
         })
         .catch(() => {
-          var imgRef = "default";
+          var imgRef = "avatar-default.png";
           var avatarRef = storageRef.child("avatar/" + imgRef);
           avatarRef.getDownloadURL().then((url) => {
             return (this.avatarURL = url);

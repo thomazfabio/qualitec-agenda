@@ -139,6 +139,7 @@ export default {
       this.upAvatar = true;
     },
     deleteAccount: function () {
+      this.$store.dispatch("deleteAccount", this.userId);
       this.fechaModalAlert();
     },
     getAvatarUrl() {

@@ -33,7 +33,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setStatusUploadImage(context, payload){
+    setStatusUploadImage(context, payload) {
       context.commit("uploadImageStatus", payload)
     },
     currentUser(context, payload) {
@@ -60,6 +60,21 @@ export default new Vuex.Store({
           // quando estiver feito o upload com sucesso
           context.commit("uploadImageStatus", "success")
         });
+    },
+    deleteAccount(context, payload) {
+      const user = firebaseApp.auth().currentUser;
+      const userUid = payload
+      // deleta usuario
+      user.delete().then(function () {
+        // deleta dados do usuario no banco
+        const database = firebaseApp.database()
+        database.ref("users/" + userUid).remove().then(() => {
+          context.commit("currentUser", false);
+          console.log("User deleted.")
+        }).catch((error) => { console.log(error)});
+      }).catch(function (error) {
+        // An error happened.
+      });
     },
   },
   modules: {

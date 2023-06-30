@@ -233,18 +233,26 @@ export default {
           // Signed in
           var userId = userCredential.user.uid;
           console.log(userCredential);
-          //update dados user recen criado
-          userCredential.user
-            .updateProfile({
+          const storage = this.$firebase.storage().ref();
+          storage.child("avatar/avatar-default.png").getDownloadURL().then((url) => {
+            console.log(url);
+            userCredential.user.updateProfile({
               displayName: firstname + "." + lastname,
-              photoURL: "https://example.com/jane-q-user/profile.jpg",
-            })
-            .then((sucess) => {
-              console.log("sucess");
-            })
-            .catch((error) => {
-              console.log(error);
+              photoURL: url,
             });
+          })
+          // //update dados user recen criado
+          // userCredential.user
+          //   .updateProfile({
+          //     displayName: firstname + "." + lastname,
+          //     photoURL: "https://example.com/jane-q-user/profile.jpg",
+          //   })
+          //   .then((sucess) => {
+          //     console.log("sucess");
+          //   })
+          //   .catch((error) => {
+          //     console.log(error);
+          //   });
           // Guardar dados de perfil
           this.$firebase
             .database()

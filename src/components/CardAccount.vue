@@ -139,6 +139,7 @@ export default {
       this.upAvatar = true;
     },
     deleteAccount: function () {
+      this.$store.dispatch("deleteAccount", this.userId);
       this.fechaModalAlert();
     },
     getAvatarUrl() {
@@ -152,7 +153,7 @@ export default {
           return (this.avatarURL = url);
         })
         .catch(() => {
-          var imgRef = "default";
+          var imgRef = "avatar-default.png";
           var avatarRef = storageRef.child("avatar/" + imgRef);
           avatarRef.getDownloadURL().then((url) => {
             return (this.avatarURL = url);

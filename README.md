@@ -16,12 +16,12 @@ Aqui você pode acessar um demo:
 
 ## Funcionalidades do WebApp
 
-Cadastro de Usuários
-funcionalidade de login com persistência
-Proteção de rotas para usuarios logados
-Banco de dados Nosql (firebase)
-Tela principal
-Tela para configurar e editar usuarios
+Cadastro de Usuários  
+funcionalidade de login com persistência  
+Proteção de rotas para usuarios logados  
+Banco de dados Nosql (firebase)  
+Tela principal  
+Tela para configurar e editar usuarios  
 
 ## Configuração do projeto
 

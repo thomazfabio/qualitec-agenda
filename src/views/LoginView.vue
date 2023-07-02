@@ -1,5 +1,9 @@
 <template>
-  <v-container>
+  <v-container
+    fluid
+    class="d-flex justify-center align-center"
+    style="height: 90vh"
+  >
     <v-card
       :width="width"
       rounded
@@ -9,10 +13,10 @@
       <v-row no-gutters justify="center">
         <v-col>
           <p class="primary--text text--accent-4 d-flex display-1">Login</p>
-          
+
           <v-alert dense outlined type="error" v-if="notificationUser">
             {{ notificationUser }}
-        </v-alert>
+          </v-alert>
           <v-form v-model="valid">
             <v-row>
               <v-col cols="12" md="12">
@@ -41,6 +45,7 @@
             </v-row>
             <v-row no-gutters>
               <v-checkbox
+                class="mt-0"
                 v-model="persist"
                 :label="`Manter conectado`"
               ></v-checkbox>

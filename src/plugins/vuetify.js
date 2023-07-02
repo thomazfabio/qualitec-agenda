@@ -22,6 +22,7 @@ export default new Vuetify({
                 primary: '#0D3B66',
                 secondary: '#FF9800',
                 anchor: '#8c9eff',
+                
             },
         },
     },

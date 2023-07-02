@@ -7,16 +7,16 @@
       :loading="loading"
       class="pb-10"
     >
-      <v-card-title class="primary--text" >Informações da conta</v-card-title>
+      <v-card-title class="primary--text">Informações da conta</v-card-title>
       <v-divider></v-divider>
       <v-container class="d-flex" style="background: #f5f5f5"
-        ><v-avatar style="border: solid 1px #c5c5c5;" size="105">
+        ><v-avatar style="border: solid 1px #c5c5c5" size="105">
           <img :src="avatarURL" alt="" />
         </v-avatar>
 
         <v-btn
-        style="margin-top: 75px; margin-left: 65px"
-        absolute
+          style="margin-top: 75px; margin-left: 65px"
+          absolute
           small
           color="personal_action_2 lighten-2"
           dark
@@ -34,7 +34,12 @@
               <th class="text-left pr-2" width="10%">Nome:</th>
               <td class="text-left pl-0 pr-0">{{ userName }}</td>
               <td class="text-left pl-2 pr-0">
-                <v-btn style="color: white;" tile small color="personal_action_2 lighten-2">
+                <v-btn
+                  style="color: white"
+                  tile
+                  small
+                  color="personal_action_2 lighten-2"
+                >
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
               </td>
@@ -44,7 +49,12 @@
               <th class="text-left pr-2">Email:</th>
               <td class="text-left pl-0 pr-0">{{ userEmail }}</td>
               <td class="text-left pl-2 pr-0">
-                <v-btn style="color: white;" tile small color="personal_action_2 lighten-2">
+                <v-btn
+                  style="color: white"
+                  tile
+                  small
+                  color="personal_action_2 lighten-2"
+                >
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
               </td>
@@ -54,7 +64,13 @@
               <th class="text-left pr-2">Telefone:</th>
               <td class="text-left pl-0 pr-0">+556696112740</td>
               <td class="text-left pl-2 pr-0">
-                <v-btn style="color: white;" tile small color="personal_action_2 lighten-2">
+                <v-btn
+                  style="color: white"
+                  tile
+                  small
+                  color="personal_action_2 lighten-2"
+                  @click="btnEditUser()"
+                >
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
               </td>
@@ -70,6 +86,11 @@
         >
       </v-row>
     </v-card>
+
+    <!--Componente para editar dados de usuario-->
+    <ModalEditUser  @closeModal="closeEditModal()" v-if="editUser">
+    </ModalEditUser>
+    <!--###-->
 
     <ModalImgT
       :width="width"
@@ -113,19 +134,28 @@
 import { mapState } from "vuex";
 import ModalImgT from "../components/ModalUpImage.vue"; // Modal para tratamento e upload da imagem
 import ModalAlert from "../components/ModalAlert.vue";
+import ModalEditUser from "../components/ModalEditUser.vue";
 export default {
   components: {
     ModalAlert,
     ModalImgT,
+    ModalEditUser,
   },
   name: "cardAccount",
   data: () => ({
+    editUser: false,
     loading: false,
     deleteAlert: false,
     upAvatar: false,
     avatarURL: "",
   }),
   methods: {
+    closeEditModal: function () {
+      this.editUser = false;
+    },
+    btnEditUser: function () {
+      this.editUser = true;
+    },
     fechaModalAlert: function () {
       this.deleteAlert = false;
     },
@@ -197,8 +227,8 @@ export default {
   created() {
     this.getAvatarUrl();
   },
-  updated(){
+  updated() {
     this.getAvatarUrl();
-  }
+  },
 };
 </script>

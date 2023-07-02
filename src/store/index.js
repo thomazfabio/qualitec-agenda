@@ -37,6 +37,7 @@ export default new Vuex.Store({
       context.commit("uploadImageStatus", payload)
     },
     currentUser(context, payload) {
+      console.log(payload)
       context.commit("currentUser", payload)
     },
     isSpinnerVisible(context, payload) {
@@ -61,6 +62,8 @@ export default new Vuex.Store({
           context.commit("uploadImageStatus", "success")
         });
     },
+
+    // deleta conta do usuario
     deleteAccount(context, payload) {
       const user = firebaseApp.auth().currentUser;
       const userUid = payload
@@ -73,7 +76,7 @@ export default new Vuex.Store({
           console.log("User deleted.")
         }).catch((error) => { console.log(error)});
       }).catch(function (error) {
-        // An error happened.
+        console.log(error)
       });
     },
   },

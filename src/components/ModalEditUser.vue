@@ -4,9 +4,9 @@
       <v-card>
         <v-container>
           <v-card-title class="primary--text"
-            >Alterar dados da conta</v-card-title
+            >Alterar {{ dataUser.name }}</v-card-title
           >
-          <v-card-text>
+          <v-card-text class="pb-0">
             <v-row>
               <v-col>
                 <v-text-field
@@ -19,12 +19,12 @@
             </v-row>
           </v-card-text>
         </v-container>
-        <v-card-actions>
+        <v-card-actions class="pt-0 pr-5">
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="$emit('closeModal')">
+          <v-btn color="personal_action_2 darken-1" text @click="$emit('closeModal')">
             Fechar
           </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">
+          <v-btn color="personal_action_1 darken-1" text @click="dialog = false">
             Salvar
           </v-btn>
         </v-card-actions>
@@ -38,6 +38,9 @@ export default {
   data: () => ({
     dialog: true,
   }),
+  props: {
+   dataUser: Object,
+  },
 };
 </script>
 

@@ -39,6 +39,9 @@
                   tile
                   small
                   color="personal_action_2 lighten-2"
+                  @click="
+                    btnEditUser({ name: 'nome', value: ''+ userName })
+                  "
                 >
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
@@ -69,7 +72,9 @@
                   tile
                   small
                   color="personal_action_2 lighten-2"
-                  @click="btnEditUser()"
+                  @click="
+                    btnEditUser({ name: 'telefone', value: '+556696112740' })
+                  "
                 >
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
@@ -88,7 +93,11 @@
     </v-card>
 
     <!--Componente para editar dados de usuario-->
-    <ModalEditUser  @closeModal="closeEditModal()" v-if="editUser">
+    <ModalEditUser
+      :dataUser="dataEditUser"
+      @closeModal="closeEditModal()"
+      v-if="editUser"
+    >
     </ModalEditUser>
     <!--###-->
 
@@ -153,7 +162,8 @@ export default {
     closeEditModal: function () {
       this.editUser = false;
     },
-    btnEditUser: function () {
+    btnEditUser: function (data) {
+      this.$store.dispatch("setEditUser", data);
       this.editUser = true;
     },
     fechaModalAlert: function () {
@@ -205,6 +215,9 @@ export default {
       },
       primaryAvatarURL: (state) => {
         return state.currentUser.photoURL;
+      },
+      dataEditUser: (state) => {
+        return state.editUser;
       },
     }),
 

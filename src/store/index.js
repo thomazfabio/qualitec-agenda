@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     currentUser: false,
     isSpinnerVisible: true,
-    uploadImageStatus: null
+    uploadImageStatus: null,
+    editUser: false,
   },
   getters: {
     currentUser(state) {
@@ -30,9 +31,16 @@ export default new Vuex.Store({
     },
     uploadImageStatus(state, payload) {
       state.uploadImageStatus = payload
+    },
+    editUser(state, payload) {
+      state.editUser = payload
     }
   },
   actions: {
+    setEditUser(context, payload) {
+      context.commit("editUser", payload)
+    },
+
     setStatusUploadImage(context, payload) {
       context.commit("uploadImageStatus", payload)
     },

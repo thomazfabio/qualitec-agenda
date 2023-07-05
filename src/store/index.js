@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     currentUser: false,
     isSpinnerVisible: true,
-    uploadImageStatus: null
+    uploadImageStatus: null,
+    editUser: false,
   },
   getters: {
     currentUser(state) {
@@ -30,13 +31,21 @@ export default new Vuex.Store({
     },
     uploadImageStatus(state, payload) {
       state.uploadImageStatus = payload
+    },
+    editUser(state, payload) {
+      state.editUser = payload
     }
   },
   actions: {
+    setEditUser(context, payload) {
+      context.commit("editUser", payload)
+    },
+
     setStatusUploadImage(context, payload) {
       context.commit("uploadImageStatus", payload)
     },
     currentUser(context, payload) {
+      console.log(payload)
       context.commit("currentUser", payload)
     },
     isSpinnerVisible(context, payload) {
@@ -61,6 +70,8 @@ export default new Vuex.Store({
           context.commit("uploadImageStatus", "success")
         });
     },
+
+    // deleta conta do usuario
     deleteAccount(context, payload) {
       const user = firebaseApp.auth().currentUser;
       const userUid = payload
@@ -73,7 +84,7 @@ export default new Vuex.Store({
           console.log("User deleted.")
         }).catch((error) => { console.log(error)});
       }).catch(function (error) {
-        // An error happened.
+        console.log(error)
       });
     },
   },

@@ -1,5 +1,9 @@
 <template>
-  <v-container>
+  <v-container
+    fluid
+    class="d-flex justify-center align-center"
+    style="height: 90vh"
+  >
     <v-card class="personal_bg_card pa-5" :width="width" style="margin: 0 auto">
       <v-row>
         <v-col>
@@ -162,12 +166,12 @@ export default {
     email: "",
     nameRules: [
       (v) => !!v || "Nome é obrigatório",
-      (v) => v.length <= 10 || "O nome deve ter menos de 10 caracteres",
+      (v) => v.length <= 20 || "O nome deve ter menos de 20 caracteres",
       (v) => v.length >= 3 || "O nome deve ter no mínimo 3 caracteres",
     ],
     lastNameRules: [
       (v) => !!v || "Sobrenome é obrigatório",
-      (v) => v.length <= 10 || "O sobrenome deve ter menos de 10 caracteres",
+      (v) => v.length <= 30 || "O sobrenome deve ter menos de 30 caracteres",
       (v) => v.length >= 2 || "O sobrenome deve ter no mínimo 2 caracteres",
     ],
     passwordRules: [
@@ -234,25 +238,16 @@ export default {
           var userId = userCredential.user.uid;
           console.log(userCredential);
           const storage = this.$firebase.storage().ref();
-          storage.child("avatar/avatar-default.png").getDownloadURL().then((url) => {
-            console.log(url);
-            userCredential.user.updateProfile({
-              displayName: firstname + "." + lastname,
-              photoURL: url,
+          storage
+            .child("avatar/avatar-default.png")
+            .getDownloadURL()
+            .then((url) => {
+              console.log(url);
+              userCredential.user.updateProfile({
+                displayName: firstname + " " + lastname,
+                photoURL: url,
+              });
             });
-          })
-          // //update dados user recen criado
-          // userCredential.user
-          //   .updateProfile({
-          //     displayName: firstname + "." + lastname,
-          //     photoURL: "https://example.com/jane-q-user/profile.jpg",
-          //   })
-          //   .then((sucess) => {
-          //     console.log("sucess");
-          //   })
-          //   .catch((error) => {
-          //     console.log(error);
-          //   });
           // Guardar dados de perfil
           this.$firebase
             .database()

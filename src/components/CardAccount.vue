@@ -57,6 +57,9 @@
                   tile
                   small
                   color="personal_action_2 lighten-2"
+                  @click="
+                    btnEditUser({ name: 'email', value: null })
+                  "
                 >
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>

@@ -39,9 +39,7 @@
                   tile
                   small
                   color="personal_action_2 lighten-2"
-                  @click="
-                    btnEditUser({ name: 'nome', value: ''+ userName })
-                  "
+                  @click="btnEditUser({ name: 'nome', value: '' + userName })"
                 >
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
@@ -57,9 +55,7 @@
                   tile
                   small
                   color="personal_action_2 lighten-2"
-                  @click="
-                    btnEditUser({ name: 'email', value: null })
-                  "
+                  @click="btnEditUser({ name: 'email', value: null })"
                 >
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
@@ -68,7 +64,7 @@
 
             <tr>
               <th class="text-left pr-2">Telefone:</th>
-              <td class="text-left pl-0 pr-0">+556696112740</td>
+              <td class="text-left pl-0 pr-0">{{ userPerfilCellPhone }}</td>
               <td class="text-left pl-2 pr-0">
                 <v-btn
                   style="color: white"
@@ -99,6 +95,7 @@
     <ModalEditUser
       :dataUser="dataEditUser"
       @closeModal="closeEditModal()"
+      @updateUser="updateUser"
       v-if="editUser"
     >
     </ModalEditUser>
@@ -185,6 +182,14 @@ export default {
       this.$store.dispatch("deleteAccount", this.userId);
       this.fechaModalAlert();
     },
+    // recupera dados do usuario no realtime database
+    getDataUser() {
+      const dataUserRef = this.$firebase.database().ref("users/" + this.userId);
+      dataUserRef.on("value", (snapshot) => {
+        const dataUser = snapshot.val();
+        this.$store.dispatch("addProfileToUser", dataUser);
+      });
+    },
     getAvatarUrl() {
       var userId = this.userId;
       var imgRef = userId;
@@ -202,6 +207,27 @@ export default {
             return (this.avatarURL = url);
           });
         });
+    },
+    //atualiza user
+    updateUser(dataUserEdited) {
+      try {
+        if (
+          dataUserEdited.firstNane != null ||
+          dataUserEdited.lastName != null
+        ) {
+          console.log("nome editado");
+        }
+        //passa o telefone a ser atualizado
+        if (dataUserEdited.cellPhone != null) {
+          this.$store.dispatch("updateUserDataFirebase", {
+            typeValue: "cellPhone",
+            userId: this.userId,
+            cellPhone: dataUserEdited.cellPhone,
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 
@@ -221,6 +247,10 @@ export default {
       },
       dataEditUser: (state) => {
         return state.editUser;
+      },
+      //dados do estado userPerfil
+      userPerfilCellPhone: (state) => {
+        return state.currentUserPerfil.cellPhone;
       },
     }),
 
@@ -242,6 +272,7 @@ export default {
 
   created() {
     this.getAvatarUrl();
+    this.getDataUser();
   },
   updated() {
     this.getAvatarUrl();

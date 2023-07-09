@@ -7,24 +7,35 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currentUser: false,
+    currentUserPerfil: false,
     isSpinnerVisible: true,
     uploadImageStatus: null,
     editUser: false,
+    updateUserPerfilStatus: null,
   },
   getters: {
     currentUser(state) {
       return state.currentUser
+    },
+    currentUserPerfil(state) {
+      return state.currentUserPerfil
     },
     isSpinnerVisible(state) {
       return state.isSpinnerVisible
     },
     uploadImageStatus(state) {
       return state.uploadImageStatus
-    }
+    },
+    updateUserPerfilStatus(state) {
+      return state.updateUserPerfilStatus
+    },
   },
   mutations: {
     currentUser(state, payload) {
       state.currentUser = payload
+    },
+    addProfileToUser(state, payload) {
+      state.currentUserPerfil = payload
     },
     isSpinnerVisible(state, payload) {
       state.isSpinnerVisible = payload
@@ -32,20 +43,49 @@ export default new Vuex.Store({
     uploadImageStatus(state, payload) {
       state.uploadImageStatus = payload
     },
+    updateUserPerfilStatus(state, payload) {
+      state.updateUserPerfilStatus = payload
+    },
     editUser(state, payload) {
       state.editUser = payload
     }
   },
   actions: {
+    //aquiseleciona qual dados do usuario vai ser editado
     setEditUser(context, payload) {
       context.commit("editUser", payload)
     },
 
+    //atualiza dados do usuario no banco firebase
+    updateUserDataFirebase(context, payload) {
+      const database = firebaseApp.database()
+      const userId = payload.userId
+      const dataType = payload.typeValue
+      //caso o dado a ser atualizado seja o telefone
+      if (dataType == "cellPhone") {
+        let userdata = payload.cellPhone
+        database.ref("users/" + userId).update({ cellPhone: userdata },
+          //retorna erro ou sucesso
+          (error) => {
+            if (error) { console.log(error) }
+            else {
+              context.commit("updateUserPerfilStatus", "success")
+              console.log("foi salvo") }
+          }).then(() => {
+          }).catch((error) => { console.log(error) });
+      }
+    },
+    //adiona o perfil baixado do reltimedabase ao state de userPerfil
+    addProfileToUser(context, payload) {
+      context.commit("addProfileToUser", payload)
+    },
     setStatusUploadImage(context, payload) {
       context.commit("uploadImageStatus", payload)
     },
+    setStatusUpdateUserProfile(context, payload) {
+      context.commit("updateUserPerfilStatus", payload)
+    },
     currentUser(context, payload) {
-      console.log(payload)
       context.commit("currentUser", payload)
     },
     isSpinnerVisible(context, payload) {
@@ -82,7 +122,7 @@ export default new Vuex.Store({
         database.ref("users/" + userUid).remove().then(() => {
           context.commit("currentUser", false);
           console.log("User deleted.")
-        }).catch((error) => { console.log(error)});
+        }).catch((error) => { console.log(error) });
       }).catch(function (error) {
         console.log(error)
       });

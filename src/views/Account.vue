@@ -12,10 +12,6 @@ export default {
     cardAccount,
   },
   data: () => ({}),
-  created() {
-    console.log(this.$vuetify.breakpoint.name);
-  },
-
   computed: {
     //esta função que esta sendo utilizada para renderizar ou não o template do app
     isLogged: function () {

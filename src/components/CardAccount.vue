@@ -1,27 +1,14 @@
 <template>
   <v-container>
-    <v-card
-      style="margin: 0 auto; margin-top: 15px"
-      :width="width"
-      elevation="6"
-      :loading="loading"
-      class="pb-10"
-    >
+    <v-card style="margin: 0 auto; margin-top: 15px" :width="width" elevation="6" :loading="loading" class="pb-10">
       <v-card-title class="primary--text">Informações da conta</v-card-title>
       <v-divider></v-divider>
-      <v-container class="d-flex" style="background: #f5f5f5"
-        ><v-avatar style="border: solid 1px #c5c5c5" size="105">
+      <v-container class="d-flex" style="background: #f5f5f5"><v-avatar style="border: solid 1px #c5c5c5" size="105">
           <img :src="avatarURL" alt="" />
         </v-avatar>
 
-        <v-btn
-          style="margin-top: 75px; margin-left: 65px"
-          absolute
-          small
-          color="personal_action_2 lighten-2"
-          dark
-          @click="btnUpAvatar()"
-        >
+        <v-btn style="margin-top: 75px; margin-left: 65px" absolute small color="personal_action_2 lighten-2" dark
+          @click="btnUpAvatar()">
           <v-icon> mdi-camera </v-icon>
         </v-btn>
       </v-container>
@@ -33,14 +20,9 @@
             <tr>
               <th class="text-left pr-2" width="10%">Nome:</th>
               <td class="text-left pl-0 pr-0">{{ userName }}</td>
-              <td class="text-left pl-2 pr-0">
-                <v-btn
-                  style="color: white"
-                  tile
-                  small
-                  color="personal_action_2 lighten-2"
-                  @click="btnEditUser({ name: 'nome', value: '' + userName })"
-                >
+              <td class="d-flex justify-end  align-center">
+                <v-btn style="color: white" tile small color="personal_action_2 lighten-2"
+                  @click="btnEditUser({ name: 'nome', value: '' + userName })">
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
               </td>
@@ -49,14 +31,9 @@
             <tr>
               <th class="text-left pr-2">Email:</th>
               <td class="text-left pl-0 pr-0">{{ userEmail }}</td>
-              <td class="text-left pl-2 pr-0">
-                <v-btn
-                  style="color: white"
-                  tile
-                  small
-                  color="personal_action_2 lighten-2"
-                  @click="btnEditUser({ name: 'email', value: null })"
-                >
+              <td class="d-flex justify-end  align-center">
+                <v-btn style="color: white" tile small color="personal_action_2 lighten-2"
+                  @click="btnEditUser({ name: 'email', value: null })">
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
               </td>
@@ -65,16 +42,10 @@
             <tr>
               <th class="text-left pr-2">Telefone:</th>
               <td class="text-left pl-0 pr-0">{{ userPerfilCellPhone }}</td>
-              <td class="text-left pl-2 pr-0">
-                <v-btn
-                  style="color: white"
-                  tile
-                  small
-                  color="personal_action_2 lighten-2"
-                  @click="
-                    btnEditUser({ name: 'telefone', value: '+556696112740' })
-                  "
-                >
+              <td class="d-flex justify-end  align-center">
+                <v-btn style="color: white" tile small color="personal_action_2 lighten-2" @click="
+                  btnEditUser({ name: 'telefone', value: '+556696112740' })
+                  ">
                   <v-icon small> mdi-pencil </v-icon>
                 </v-btn>
               </td>
@@ -85,31 +56,17 @@
       <!--fim codigo da tabela-->
       <v-divider></v-divider>
       <v-row>
-        <v-btn class="ml-6 mt-10" small color="red" dark @click="deletar()"
-          >Deletar conta</v-btn
-        >
+        <v-btn class="ml-6 mt-10" small color="red" dark @click="deletar()">Deletar conta</v-btn>
       </v-row>
     </v-card>
 
     <!--Componente para editar dados de usuario-->
-    <ModalEditUser
-      :dataUser="dataEditUser"
-      @closeModal="closeEditModal()"
-      @updateUser="updateUser"
-      v-if="editUser"
-    >
+    <ModalEditUser :dataUser="dataEditUser" @closeModal="closeEditModal()" @updateUser="updateUser" v-if="editUser">
     </ModalEditUser>
     <!--###-->
 
-    <ModalImgT
-      :width="width"
-      :isAvatar="true"
-      typeImage="jpeg"
-      :nameImage="userId"
-      refImage="avatar"
-      v-if="upAvatar"
-      @closeModal="closeModal()"
-    >
+    <ModalImgT :width="width" :isAvatar="true" typeImage="jpeg" :nameImage="userId" refImage="avatar" v-if="upAvatar"
+      @closeModal="closeModal()">
     </ModalImgT>
 
     <!--Componente avançado ESDUDAR BEM-->
@@ -123,15 +80,11 @@
       </template>
 
       <template v-slot:btn1>
-        <v-btn outlined color="error" text @click="deleteAccount()"
-          >Confirmar</v-btn
-        >
+        <v-btn outlined color="error" text @click="deleteAccount()">Confirmar</v-btn>
       </template>
 
       <template v-slot:btn2>
-        <v-btn outlined color="success" text @click="fechaModalAlert()"
-          >Cancelar</v-btn
-        >
+        <v-btn outlined color="success" text @click="fechaModalAlert()">Cancelar</v-btn>
       </template>
     </ModalAlert>
     <!--Componente avançado ESDUDAR BEM-->
@@ -215,7 +168,14 @@ export default {
           dataUserEdited.firstNane != null ||
           dataUserEdited.lastName != null
         ) {
-          console.log("nome editado");
+          let fullName = ""
+          dataUserEdited.firstNane === "" || dataUserEdited.firstNane === null ?
+            dataUserEdited.firstNane = null : fullName = dataUserEdited.firstNane + " " + this.userName.split(" ").slice(1).join(" ")
+          dataUserEdited.lastName === "" || dataUserEdited.lastName === null ?
+            dataUserEdited.lastName = null : fullName = this.userName.split(" ")[0] + " " + dataUserEdited.lastName
+
+          console.log(dataUserEdited);
+          console.log(fullName)
         }
         //passa o telefone a ser atualizado
         if (dataUserEdited.cellPhone != null) {

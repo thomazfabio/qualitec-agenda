@@ -163,20 +163,26 @@ export default {
     },
     //atualiza user
     updateUser(dataUserEdited) {
-      try {
-        if (
-          dataUserEdited.firstNane != null ||
-          dataUserEdited.lastName != null
-        ) {
-          let fullName = ""
-          dataUserEdited.firstNane === "" || dataUserEdited.firstNane === null ?
-            dataUserEdited.firstNane = null : fullName = dataUserEdited.firstNane + " " + this.userName.split(" ").slice(1).join(" ")
-          dataUserEdited.lastName === "" || dataUserEdited.lastName === null ?
-            dataUserEdited.lastName = null : fullName = this.userName.split(" ")[0] + " " + dataUserEdited.lastName
+      console.log(dataUserEdited);
 
-          console.log(dataUserEdited);
-          console.log(fullName)
+      try {
+        //passa o nome a ser atualizado
+        let firstName = dataUserEdited.firstName;
+        let lastName = dataUserEdited.lastName;
+
+        if (firstName != null && lastName != null && firstName.length > 0 && lastName.length > 0) {
+          console.log("nome completo");
         }
+        else if (firstName != null && firstName.length > 0) {
+          console.log("nome");
+        }
+        else if (lastName != null && lastName.length > 0) {
+          console.log("sobrenome");
+        }
+        else {
+          console.log("nada");
+        }
+
         //passa o telefone a ser atualizado
         if (dataUserEdited.cellPhone != null) {
           this.$store.dispatch("updateUserDataFirebase", {

@@ -7,7 +7,7 @@
           <v-card-text class="pb-0" v-if="dataUser.name == 'nome'">
             <v-row>
               <v-col>
-                <v-text-field label="Seu nome*" v-model="dataEdited.firstNane" :placeholder="dataUser.value.split(' ')[0]"
+                <v-text-field label="Seu nome*" v-model="dataEdited.firstName" :placeholder="dataUser.value.split(' ')[0]"
                   outlined dense required></v-text-field>
                 <v-text-field label="Seu sobrenome*" v-model="dataEdited.lastName"
                   :placeholder="dataUser.value.split(' ').slice(1).join(' ')" outlined dense required></v-text-field>
@@ -62,7 +62,7 @@ export default {
     isLoading: false,
     isLoadingSuccess: false,
     dataEdited: {
-      firstNane: null,
+      firstName: null,
       lastName: null,
       cellPhone: null,
       email: null,

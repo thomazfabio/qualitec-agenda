@@ -51,7 +51,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    //aquiseleciona qual dados do usuario vai ser editado
+    //aqui seleciona qual dados do usuario vai ser editado
     setEditUser(context, payload) {
       context.commit("editUser", payload)
     },
@@ -59,8 +59,23 @@ export default new Vuex.Store({
     //atualiza dados do usuario no banco firebase
     updateUserDataFirebase(context, payload) {
       const database = firebaseApp.database()
+      const user = firebaseApp.auth().currentUser;
       const userId = payload.userId
       const dataType = payload.typeValue
+
+      //caso o dado a ser atualizado seja o nome
+      if (dataType == "userName") {
+        let path = payload.path
+        let dataToUp = payload.dataToUp
+        database.ref(path).update(dataToUp).then(() => {
+          user.updateProfile({
+            displayName: payload.fullName
+          }).then(() => {
+            context.commit("updateUserPerfilStatus", "success")
+          })
+        }).catch((error) => { console.log(error) })
+      }
+
       //caso o dado a ser atualizado seja o telefone
       if (dataType == "cellPhone") {
         let userdata = payload.cellPhone
@@ -70,12 +85,12 @@ export default new Vuex.Store({
             if (error) { console.log(error) }
             else {
               context.commit("updateUserPerfilStatus", "success")
-              console.log("foi salvo") }
+              }
           }).then(() => {
           }).catch((error) => { console.log(error) });
       }
     },
-    //adiona o perfil baixado do reltimedabase ao state de userPerfil
+    //adiciona o perfil baixado do reltimedabase ao state de userPerfil
     addProfileToUser(context, payload) {
       context.commit("addProfileToUser", payload)
     },
@@ -127,7 +142,4 @@ export default new Vuex.Store({
         console.log(error)
       });
     },
-  },
-  modules: {
-  }
-})
+}})

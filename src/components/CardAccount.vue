@@ -163,26 +163,56 @@ export default {
     },
     //atualiza user
     updateUser(dataUserEdited) {
-      console.log(dataUserEdited);
-
+      
       try {
         //passa o nome a ser atualizado
         let firstName = dataUserEdited.firstName;
         let lastName = dataUserEdited.lastName;
-
+        let path = "";
+        
+        //nome completo
         if (firstName != null && lastName != null && firstName.length > 0 && lastName.length > 0) {
-          console.log("nome completo");
-        }
+          let fullName = firstName + " " + lastName;
+          path = "users/" + this.userId;
+          this.$store.dispatch("updateUserDataFirebase", {
+            path: path,
+            fullName: fullName,
+            dataToUp: {
+              firstname: firstName,
+              lastname: lastName,
+            },
+            typeValue: "userName",
+          });
+        }//nome
         else if (firstName != null && firstName.length > 0) {
-          console.log("nome");
-        }
+          let fullName = firstName + " " + this.userName.split(' ').slice(1).join(' ');
+          path = "users/" + this.userId;
+          this.$store.dispatch("updateUserDataFirebase", {
+            path: path,
+            fullName: fullName,
+            dataToUp: {
+              firstname: firstName,
+            },
+            typeValue: "userName",
+          });
+        }//sobrenome
         else if (lastName != null && lastName.length > 0) {
-          console.log("sobrenome");
-        }
+          let fullName = this.userName.split(' ')[0] + " " + lastName;
+          path = "users/" + this.userId;
+          this.$store.dispatch("updateUserDataFirebase", {
+            path: path,
+            fullName: fullName,
+            dataToUp: {
+              lastname: lastName,
+            },
+            typeValue: "userName",
+          });
+        }//nada
         else {
           console.log("nada");
         }
-
+       
+      
         //passa o telefone a ser atualizado
         if (dataUserEdited.cellPhone != null) {
           this.$store.dispatch("updateUserDataFirebase", {

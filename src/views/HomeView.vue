@@ -1,11 +1,16 @@
 <template>
   <v-container  class="elevation-4">
-    <h1 class="primary--text">Aqui é onde você poderá construir a sua solução</h1>
+  <ServiceSchedule></ServiceSchedule>
   </v-container>
 </template>
 
 <script>
+import ServiceSchedule from "../components/ServiceSchedule.vue"
 export default {
+  
+  components:{
+    ServiceSchedule
+  },
   data: () => ({
     userName: '',
     userEmail: '',

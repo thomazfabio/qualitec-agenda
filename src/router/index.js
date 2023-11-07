@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import Account from '../views/Account.vue'
 import Login from '../views/LoginView.vue'
 import Register from '../views/RegisterView.vue'
+import Setup from '../views/ConfigView.vue'
 import store from '../store/index'
 import { firebaseApp } from '../plugins/firebase'
 
@@ -46,6 +47,11 @@ const routes = [
     component: Register,
   },
 
+  {
+    path: '/setup',
+    name: 'setup',
+    component: Setup,
+  },
 ]
 
 const router = new VueRouter({

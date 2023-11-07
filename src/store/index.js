@@ -12,6 +12,14 @@ export default new Vuex.Store({
     uploadImageStatus: null,
     editUser: false,
     updateUserPerfilStatus: null,
+    service_event: {
+      id: "0101",
+      os: "3000",
+      date: {
+        time_order: {},
+      },
+      status: "em aberto",
+    }
   },
   getters: {
     currentUser(state) {
@@ -85,7 +93,7 @@ export default new Vuex.Store({
             if (error) { console.log(error) }
             else {
               context.commit("updateUserPerfilStatus", "success")
-              }
+            }
           }).then(() => {
           }).catch((error) => { console.log(error) });
       }
@@ -142,4 +150,5 @@ export default new Vuex.Store({
         console.log(error)
       });
     },
-}})
+  }
+})

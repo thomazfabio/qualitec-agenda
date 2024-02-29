@@ -12,6 +12,8 @@ export default new Vuex.Store({
     uploadImageStatus: null,
     editUser: false,
     updateUserPerfilStatus: null,
+
+    // ver se isto esta sendo usado
     service_event: {
       id: "0101",
       os: "3000",
@@ -20,6 +22,8 @@ export default new Vuex.Store({
       },
       status: "em aberto",
     }
+    // !!
+    
   },
   getters: {
     currentUser(state) {
